@@ -26,11 +26,16 @@ export const handler = async (event) => {
     ].join('\n');
 
     const tgUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    await fetch(tgUrl, {
+    const resp = await fetch(tgUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: chatId, text })
     });
+    const ok = resp.ok;
+    if (!ok) {
+      const errText = await resp.text().catch(()=> '');
+      console.error('Telegram API error:', resp.status, errText);
+    }
 
     return { statusCode: 200, body: 'OK' };
   } catch (e) {
