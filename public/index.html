@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&display=swap" rel="stylesheet">
-  <meta name="app-version" content="1.0.0" />
+  <meta name="app-version" content="1.0.1" />
 
   <script type="application/ld+json">
   {
@@ -250,8 +250,11 @@
           </div>
         </div>
 
-        <form class="contact-form" name="contact" netlify data-netlify="true">
+        <form class="contact-form" name="contact" method="POST" action="/" netlify data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contact" />
+          <p hidden>
+            <label>Не заполнять: <input name="bot-field" /></label>
+          </p>
           <div class="row">
             <label>
               Имя
