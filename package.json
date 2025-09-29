@@ -1,0 +1,22 @@
+{
+  "name": "yellowcars",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "serve public -l 5173",
+    "preview": "serve public -l 4173",
+    "logos": "node scripts/fetch-logos.mjs",
+    "logos:wiki": "node scripts/fetch-wiki-logos.mjs",
+    "icons:social": "node scripts/fetch-social-icons.mjs",
+    "png:logo": "node scripts/svg2png.mjs",
+    "png:extract": "node scripts/extract-logo-transparent.mjs"
+  },
+  "devDependencies": {
+    "serve": "^14.2.3",
+    "sharp": "^0.34.4",
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}
