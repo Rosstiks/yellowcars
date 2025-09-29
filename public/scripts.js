@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const ver = document.querySelector('meta[name="app-version"]')?.getAttribute('content') || 'dev';
+    console.log(`YellowCars app version: ${ver}`);
+  } catch {}
   const year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
 
@@ -91,7 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
       // Netlify will handle submit; prevent page jump and show success plate optimistically
       e.preventDefault();
       const formData = new FormData(form);
-      fetch('/', { method: 'POST', body: formData })
+      const params = new URLSearchParams();
+      for (const [key, value] of formData.entries()) {
+        params.append(key, String(value));
+      }
+      const action = form.getAttribute('action') || '/';
+      fetch(action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      })
         .then(() => {
           sessionStorage.setItem('contactSent', '1');
           form.classList.add('is-hidden');
